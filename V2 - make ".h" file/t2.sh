@@ -1,42 +1,28 @@
 a="int SocketConnect(int hSocket)"
 
-# Check the starting
-if  [[ $a == "char "* ]] || 
-    [[ $a == "short "* ]] || 
-    [[ $a == "int "* ]] || 
-    [[ $a == "long "* ]] || 
-    [[ $a == "float "* ]] || 
-    [[ $a == "double "* ]] || 
-    [[ $a == "struct "* ]] || 
-    [[ $a == "union "* ]] || 
-    [[ $a == "enum "* ]] || 
-    [[ $a == "char "* ]] || 
-    [[ $a == "*short "* ]] || 
-    [[ $a == "*int "* ]] || 
-    [[ $a == "*long "* ]] || 
-    [[ $a == "*float "* ]] || 
-    [[ $a == "*double "* ]] || 
-    [[ $a == "*struct "* ]] || 
-    [[ $a == "*union "* ]] || 
-    [[ $a == "*enum "* ]] || 
-    [[ $a == "void "* ]] || ; then
-    
-    # Check the ending
-    if [[ $a == *")" ]] ||
-       [[ $a == *"){" ]] ||
-       [[ $a == *"){}" ]] ; then
-        echo success
-    fi
+# Check the starting with "type" and ending with ")"
+if  ([[ $line == "char "* ]] || 
+    [[ $line == "short "* ]] || 
+    [[ $line == "int "* ]] || 
+    [[ $line == "long "* ]] || 
+    [[ $line == "float "* ]] || 
+    [[ $line == "double "* ]] || 
+    [[ $line == "struct "* ]] || 
+    [[ $line == "union "* ]] || 
+    [[ $line == "enum "* ]] || 
+    [[ $line == "char "* ]] || 
+    [[ $line == "*short "* ]] || 
+    [[ $line == "*int "* ]] || 
+    [[ $line == "*long "* ]] || 
+    [[ $line == "*float "* ]] || 
+    [[ $line == "*double "* ]] || 
+    [[ $line == "*struct "* ]] || 
+    [[ $line == "*union "* ]] || 
+    [[ $line == "*enum "* ]] || 
+    [[ $line == "void "* ]]) &&
+    ([[ $line == *")" ]] || 
+    [[ $line == *"){" ]] ||
+    [[ $line == *"){}" ]]) ; then
     echo success
 fi
-
-
-
-/
-/
-/
-/long
-
-
-
 

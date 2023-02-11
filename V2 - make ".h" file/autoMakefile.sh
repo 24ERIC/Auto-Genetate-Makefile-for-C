@@ -26,16 +26,40 @@ for file in *; do
         # Delete file.h (Be sure no file.h)
         rm "${file%.*}".h 2> /dev/null
 
-        # create .h file
+        # Create .h file
         touch "${file%.*}".h
 
         # Loop to find signature of every function, append them in file.h
         while IFS= read -r line; do
-            echo "`ls *.c, *.h | sls "^(\w+( )?){2,}\([^!@#$+%^]+?\)"`"
-        done <client.c
+            # Check the starting with "type" and ending with ")"
+            if  ([[ $line == "char "* ]] || 
+                [[ $line == "short "* ]] || 
+                [[ $line == "int "* ]] || 
+                [[ $line == "long "* ]] || 
+                [[ $line == "float "* ]] || 
+                [[ $line == "double "* ]] || 
+                [[ $line == "struct "* ]] || 
+                [[ $line == "union "* ]] || 
+                [[ $line == "enum "* ]] || 
+                [[ $line == "char "* ]] || 
+                [[ $line == "*short "* ]] || 
+                [[ $line == "*int "* ]] || 
+                [[ $line == "*long "* ]] || 
+                [[ $line == "*float "* ]] || 
+                [[ $line == "*double "* ]] || 
+                [[ $line == "*struct "* ]] || 
+                [[ $line == "*union "* ]] || 
+                [[ $line == "*enum "* ]] || 
+                [[ $line == "void "* ]]) &&
+                ([[ $line == *")" ]] || 
+                [[ $line == *"){" ]] ||
+                [[ $line == *"){}" ]]) ; then
+                echo ${line%'{'*} >> "${file%.*}".h
+                echo >> "${file%.*}".h
+            fi
+        done <$file
     fi 
 done
-
 
 
 

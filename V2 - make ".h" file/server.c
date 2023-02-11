@@ -7,11 +7,9 @@ int SocketCreate(void)
 {
     return 1;
 }
-int BindCreatedSocket(int hSocket)
-{
+int BindCreatedSocket(int hSocket){
     return 1;
 }
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     return 1;
 }

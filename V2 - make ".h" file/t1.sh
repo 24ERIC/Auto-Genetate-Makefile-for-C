@@ -1,9 +1,3 @@
-[[ $a == z* ]]
-
-if  [[ $HOST == user1 ]] || [[ $HOST == node* ]] ;
-then
-    echo yes1
-fi
 
 for file in *; do 
     if [ -f "$file" ] && [ ${file: -2} == ".c" ]; then   
@@ -15,10 +9,32 @@ for file in *; do
 
         # Loop to find signature of every function, append them in file.h
         while IFS= read -r line; do
-            if  [[ $line == "int "* ]] || [[ $HOST == node* ]] ;
-            then
-                echo yes1
+            # Check the starting with "type" and ending with ")"
+            if  ([[ $line == "char "* ]] || 
+                [[ $line == "short "* ]] || 
+                [[ $line == "int "* ]] || 
+                [[ $line == "long "* ]] || 
+                [[ $line == "float "* ]] || 
+                [[ $line == "double "* ]] || 
+                [[ $line == "struct "* ]] || 
+                [[ $line == "union "* ]] || 
+                [[ $line == "enum "* ]] || 
+                [[ $line == "char "* ]] || 
+                [[ $line == "*short "* ]] || 
+                [[ $line == "*int "* ]] || 
+                [[ $line == "*long "* ]] || 
+                [[ $line == "*float "* ]] || 
+                [[ $line == "*double "* ]] || 
+                [[ $line == "*struct "* ]] || 
+                [[ $line == "*union "* ]] || 
+                [[ $line == "*enum "* ]] || 
+                [[ $line == "void "* ]]) &&
+                ([[ $line == *")" ]] || 
+                [[ $line == *"){" ]] ||
+                [[ $line == *"){}" ]]) ; then
+                echo ${line%'{'*} >> "${file%.*}".h
+                echo >> "${file%.*}".h
             fi
-        done <$file.c
+        done <$file
     fi 
 done
