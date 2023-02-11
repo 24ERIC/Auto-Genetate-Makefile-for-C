@@ -1,33 +1,27 @@
 #!/bin/bash
 
-
-# Create Makefile
-touch Makefile
-
-# Empty Makefile
+# reset file
 echo > Makefile
 
-names=() # Store all the c file name, without ".c" at end
+# names store all the c extension file name
+names=()
 i=0
-
-# Loop each ".c" file in current directory
 for file in *; do 
     if [ -f "$file" ] && [ ${file: -2} == ".c" ]; then         
         names[$i]="${file%.*}"
         ((i++))
     fi 
 
-    # Create .h file
+    # create .h file
     touch "${file%.*}".h
-
-    # Write .h file
     while read line; do
         echo "$p"
     done <$file
 done
 
 
-
+# create make file
+touch Makefile
 
 
 # start

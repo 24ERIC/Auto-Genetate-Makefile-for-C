@@ -3,9 +3,22 @@
 # Idea
 Deb.11 2023, I am curently learning c language, and I learn by creating things, by testing c script. Every time I need to create a Makefile for the testing which really repetitive and wasting time. Therefore, this project can provide you the better experience on learning and testing c script.
 
+# Project Detail
 
-# Detail
-There are three 
+
+# Emoj
+- ❌
+- ✅
+- 😎
+
+
+# Development Plan
+
+1. ✅make Make file
+1. make ".h" file
+1. include "include" file
+1. multiple directory in option
+
 
 
 # Research - [Bash script note](https://devhints.io/bash)
