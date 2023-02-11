@@ -1,27 +1,45 @@
 #!/bin/bash
 
-# reset file
-echo > Makefile
 
-# names store all the c extension file name
-names=()
-i=0
+# Delete Makefile (Be sure no Makefile)
+rm Makefile 2> /dev/null
+
+# Make Makefile
+touch Makefile
+
+names=() # store the name of ".c" file, without ".c"
+i=0 # Index of names array
+
+# Fill out names first
 for file in *; do 
     if [ -f "$file" ] && [ ${file: -2} == ".c" ]; then         
         names[$i]="${file%.*}"
         ((i++))
     fi 
-
-    # create .h file
-    touch "${file%.*}".h
-    while read line; do
-        echo "$p"
-    done <$file
 done
 
 
-# create make file
-touch Makefile
+i=0 # Reset index of names array to 0
+
+for file in *; do 
+    if [ -f "$file" ] && [ ${file: -2} == ".c" ]; then   
+        # Delete file.h (Be sure no file.h)
+        rm "${file%.*}".h 2> /dev/null
+
+        # create .h file
+        touch "${file%.*}".h
+
+        # Loop to find signature of every function, append them in file.h
+        while IFS= read -r line; do
+            echo "`ls *.c, *.h | sls "^(\w+( )?){2,}\([^!@#$+%^]+?\)"`"
+        done <client.c
+    fi 
+done
+
+
+
+
+
 
 
 # start
