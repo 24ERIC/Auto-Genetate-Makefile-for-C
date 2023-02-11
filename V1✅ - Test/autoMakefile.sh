@@ -11,12 +11,6 @@ for file in *; do
         names[$i]="${file%.*}"
         ((i++))
     fi 
-
-    # create .h file
-    touch "${file%.*}".h
-    while read line; do
-        echo "$p"
-    done <$file
 done
 
 
@@ -40,11 +34,6 @@ for name in ${names[@]}; do
 done
 
 
-
 # end
 echo "clean:" >> Makefile
 echo -e '\t'"rm -f *.o" ${names[@]} >> Makefile
-# for i in "${!foo[@]}"; do 
-#   echo "%s\t%s\n" "$i" "${foo[$i]}"
-# done
-
