@@ -62,16 +62,12 @@ for file in *; do
 done
 
 
-
-
-
-
-# start
+# Start of Makefile
 echo "all:" ${names[@]} >> Makefile
 echo >> Makefile
 
 
-# middle
+# Middle of Makefile
 for name in ${names[@]}; do
     echo $name":" $name".o" >> Makefile
 	echo -e '\t'"gcc -o" $name $name".o" >> Makefile
@@ -82,11 +78,9 @@ for name in ${names[@]}; do
 done
 
 
-
-# end
+# End of Makefile
 echo "clean:" >> Makefile
 echo -e '\t'"rm -f *.o" ${names[@]} >> Makefile
-# for i in "${!foo[@]}"; do 
-#   echo "%s\t%s\n" "$i" "${foo[$i]}"
-# done
+
+
 
