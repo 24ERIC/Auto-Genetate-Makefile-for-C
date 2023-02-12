@@ -1,56 +1,83 @@
 #!/bin/bash
 
 
-# Create Makefile
+# Delete Makefile (Be sure no Makefile)
+rm Makefile 2> /dev/null
+
+# Make Makefile
 touch Makefile
 
-# Empty Makefile
-echo > Makefile
+names=() # store the name of ".c" file, without ".c"
+i=0 # Index of names array
 
-names=() # Store all the c file name, without ".c" at end
-i=0
-
-# Loop each ".c" file in current directory
+# Fill out names first
 for file in *; do 
     if [ -f "$file" ] && [ ${file: -2} == ".c" ]; then         
         names[$i]="${file%.*}"
         ((i++))
     fi 
-
-    # Create .h file
-    touch "${file%.*}".h
-
-    # Write .h file
-    while read line; do
-        echo "$p"
-    done <$file
 done
 
 
+i=0 # Reset index of names array to 0
+
+for file in *; do 
+    if [ -f "$file" ] && [ ${file: -2} == ".c" ]; then   
+        # Delete file.h (Be sure no file.h)
+        rm "${file%.*}".h 2> /dev/null
+
+        # Create .h file
+        touch "${file%.*}".h
+
+        # Loop to find signature of every function, append them in file.h
+        while IFS= read -r line; do
+            # Check the starting with "type" and ending with ")"
+            if  ([[ $line == "char "* ]] || 
+                [[ $line == "short "* ]] || 
+                [[ $line == "int "* ]] || 
+                [[ $line == "long "* ]] || 
+                [[ $line == "float "* ]] || 
+                [[ $line == "double "* ]] || 
+                [[ $line == "struct "* ]] || 
+                [[ $line == "union "* ]] || 
+                [[ $line == "enum "* ]] || 
+                [[ $line == "char "* ]] || 
+                [[ $line == "*short "* ]] || 
+                [[ $line == "*int "* ]] || 
+                [[ $line == "*long "* ]] || 
+                [[ $line == "*float "* ]] || 
+                [[ $line == "*double "* ]] || 
+                [[ $line == "*struct "* ]] || 
+                [[ $line == "*union "* ]] || 
+                [[ $line == "*enum "* ]] || 
+                [[ $line == "void "* ]]) &&
+                ([[ $line == *")" ]] || 
+                [[ $line == *"){" ]] ||
+                [[ $line == *"){}" ]]) ; then
+                echo ${line%'{'*} >> "${file%.*}".h
+                echo >> "${file%.*}".h
+            fi
+        done <$file
+    fi 
+done
 
 
-
-# start
+# Start of Makefile
 echo "all:" ${names[@]} >> Makefile
 echo >> Makefile
 
 
-# middle
+# Middle of Makefile
 for name in ${names[@]}; do
     echo $name":" $name".o" >> Makefile
 	echo -e '\t'"gcc -o" $name $name".o" >> Makefile
     echo >> Makefile
-    echo $name".o:" $name".c" >> Makefile
+    echo $name".o:" $name".c" $name".h">> Makefile
 	echo -e '\t'"gcc -c" $name".c" >> Makefile
     echo >> Makefile 
 done
 
 
-
-# end
+# End of Makefile
 echo "clean:" >> Makefile
 echo -e '\t'"rm -f *.o" ${names[@]} >> Makefile
-# for i in "${!foo[@]}"; do 
-#   echo "%s\t%s\n" "$i" "${foo[$i]}"
-# done
-

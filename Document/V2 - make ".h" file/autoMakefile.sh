@@ -72,7 +72,7 @@ for name in ${names[@]}; do
     echo $name":" $name".o" >> Makefile
 	echo -e '\t'"gcc -o" $name $name".o" >> Makefile
     echo >> Makefile
-    echo $name".o:" $name".c" >> Makefile
+    echo $name".o:" $name".c" $name".h">> Makefile
 	echo -e '\t'"gcc -c" $name".c" >> Makefile
     echo >> Makefile 
 done

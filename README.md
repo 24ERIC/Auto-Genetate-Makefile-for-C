@@ -1,9 +1,23 @@
 # Auto-Genetate-Makefile-for-C
 
-# Idea
-Deb.11 2023, I am curently learning c language, and I learn by creating things, by testing c script. Every time I need to create a Makefile for the testing which really repetitive and wasting time. Therefore, this project can provide you the better experience on learning and testing c script.
+# User Story (Idea)
 
-# Project Detail
+Deb.11 2023, Eric is curently learning c language, and Eric learn by creating things, by testing many c scripts. Every time Eric need to create a Makefile for the testing which really repetitive and wasting time. Therefore, this project can provide Eric the best experience on learning and testing c scripts.
+
+# Details
+
+This project automaticly geenrate Makefile and files with ".h" extension for developer in order to save developers' time during testing and creating new thing. In other words, developers use the porject can save dramatically to work on creative and amazing ideas instead of wasting time on boring testing. 
+
+# Note during using this project
+
+Be aware of that the project does not take care the "include" file, and the file "makeMakefile.sh" must be inside the target folder (folder with many ".c" files) during running "bash makeMakefile.sh".
+
+# How to use it?
+```Bash
+  git clone ...
+  mv makeMakefile.sh "inside target foler"
+  bash makeMakefile.sh 
+```
 
 
 # Emoj
@@ -15,9 +29,9 @@ Deb.11 2023, I am curently learning c language, and I learn by creating things, 
 # Development Plan
 
 1. ✅make Make file
-1. make ".h" file
-1. include "include" file
-1. multiple directory in option
+1. ✅make ".h" file
+1. ❌include "include" file
+1. ❌multiple directory in option
 
 
 
